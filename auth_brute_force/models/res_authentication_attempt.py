@@ -116,10 +116,10 @@ class ResAuthenticationAttempt(models.Model):
             domain += [("create_date", ">", last_ok.create_date)]
         # Count failures since last success, if any
         recent_failures = self.search_count(
-            domain,
+            domain +  [("result", "not in", ["successful", "unbanned"])],
         )
         # Did we hit the limit?
-        return recent_failures > limit
+        return recent_failures >= limit
 
     @api.model
     def _trusted(self, remote, login):
