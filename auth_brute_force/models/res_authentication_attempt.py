@@ -29,6 +29,10 @@ class ResAuthenticationAttempt(models.Model):
         ],
         index=True,
     )
+    log_date = fields.Datetime(
+        default=lambda r: fields.Datetime.now(),
+        index=True,
+    )
     remote_metadata = fields.Text(
         string="Remote IP metadata",
         compute='_compute_metadata',
@@ -99,12 +103,12 @@ class ResAuthenticationAttempt(models.Model):
         # Find last successful login
         last_ok = self.search(
             domain + [("result", "in", ["successful", "unbanned"])],
-            order='create_date desc',
+            order='log_date desc',
             limit=1,
         )
 
         if last_ok:
-            domain += [("create_date", ">", last_ok.create_date)]
+            domain += [("log_date", ">", last_ok.log_date)]
         # Count failures since last success, if any
         recent_failures = self.search_count(
             domain + [

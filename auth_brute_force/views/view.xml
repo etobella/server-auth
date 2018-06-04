@@ -11,7 +11,7 @@
                 decoration-warning="result == 'failed'"
                 decoration-danger="result == 'banned'"
             >
-                <field name="create_date"/>
+                <field name="log_date"/>
                 <field name="remote"/>
                 <field name="login"/>
                 <field name="result"/>
@@ -45,7 +45,7 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="create_date"/>
+                        <field name="log_date"/>
                         <field name="result"/>
                         <field name="login"/>
                         <field name="remote"/>
@@ -61,7 +61,7 @@
         <field name="model">res.authentication.attempt</field>
         <field name="arch" type="xml">
             <graph>
-                <field name="create_date"/>
+                <field name="log_date"/>
                 <field name="result"/>
             </graph>
         </field>
