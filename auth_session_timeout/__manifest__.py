@@ -21,6 +21,6 @@
     'depends': [
         'web',
     ],
-    'post_load': 'post_load_hook',
+    #'post_load': 'post_load_hook',
     'installable': True,
 }
